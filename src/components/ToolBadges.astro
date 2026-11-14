@@ -1,0 +1,40 @@
+---
+interface Props {
+  tools: readonly string[];
+  /** Cap the number shown; the rest collapse into "+N". */
+  max?: number;
+}
+
+const { tools, max = tools.length } = Astro.props;
+const shown = tools.slice(0, max);
+const rest = tools.length - shown.length;
+---
+
+<ul class="badges" aria-label="Tools">
+  {shown.map((tool) => <li class="badge">{tool}</li>)}
+  {rest > 0 && <li class="badge badge--more">+{rest}</li>}
+</ul>
+
+<style>
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .badge {
+    padding: 0.125rem 0.4375rem;
+    border: 1px solid var(--cobalt-line);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    white-space: nowrap;
+    color: var(--cobalt);
+  }
+
+  .badge--more {
+    border-color: var(--line);
+    color: var(--muted);
+  }
+</style>

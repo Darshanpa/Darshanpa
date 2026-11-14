@@ -1,0 +1,97 @@
+---
+/** One shared dialog for every figure strip on the page. */
+---
+
+<dialog class="lightbox" data-lightbox-dialog aria-label="Figure viewer">
+  <div class="lightbox__bar">
+    <p class="mono-label" data-lightbox-counter></p>
+    <button type="button" class="bracket-btn" data-lightbox-close>
+      Close <span aria-hidden="true">✕</span>
+    </button>
+  </div>
+
+  <figure class="lightbox__figure">
+    <img data-lightbox-image alt="" />
+    <figcaption class="mono-label" data-lightbox-caption></figcaption>
+  </figure>
+
+  <div class="lightbox__nav" data-lightbox-nav>
+    <button type="button" class="bracket-btn" data-lightbox-prev>
+      <span aria-hidden="true">←</span> Prev
+    </button>
+    <button type="button" class="bracket-btn" data-lightbox-next>
+      Next <span aria-hidden="true">→</span>
+    </button>
+  </div>
+</dialog>
+
+<style>
+  .lightbox {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 1rem max(1rem, env(safe-area-inset-right)) 1rem max(1rem, env(safe-area-inset-left));
+    border: 0;
+    background: rgb(5 8 14 / 0.94);
+    color: var(--text);
+    overscroll-behavior: contain;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 1rem;
+    animation: lightbox-in 0.2s ease;
+  }
+
+  .lightbox::backdrop {
+    background: rgb(5 8 14 / 0.6);
+  }
+
+  .lightbox__bar,
+  .lightbox__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .lightbox__nav {
+    justify-content: center;
+  }
+
+  .lightbox__figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.875rem;
+    min-height: 0;
+  }
+
+  .lightbox__figure img {
+    max-width: min(100%, 100rem);
+    max-height: calc(100% - 2.5rem);
+    min-height: 0;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--line);
+    background: var(--figure);
+    cursor: zoom-out;
+  }
+
+  .lightbox__figure figcaption {
+    text-align: center;
+    color: var(--text);
+  }
+
+  @keyframes lightbox-in {
+    from {
+      opacity: 0;
+    }
+  }
+</style>

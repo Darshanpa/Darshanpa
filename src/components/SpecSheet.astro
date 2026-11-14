@@ -1,0 +1,414 @@
+---
+/**
+ * The inline spec sheet shown when a card or row is expanded.
+ * The parent supplies the [data-spec-drawer] wrapper (a div or a table row).
+ */
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import Icon from './Icon.astro';
+import ToolBadges from './ToolBadges.astro';
+import { pad, specId, type Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const figures = await Promise.all(
+  [{ src: data.cover, alt: data.coverAlt, caption: 'Overview' }, ...data.gallery].map(async (figure, i) => {
+    const full = await getImage({ src: figure.src, width: Math.min(figure.src.width, 2400) });
+    return { ...figure, full: full.src, label: `Fig. ${pad(i + 1)}` };
+  }),
+);
+
+const facts = [
+  ['Year', String(data.year)],
+  ['Role', data.role],
+  ['Duration', data.duration],
+  ['Status', data.status],
+].filter((fact): fact is [string, string] => Boolean(fact[1]));
+---
+
+<div class="spec-clip">
+  <div class="spec-min">
+    <div class="spec">
+      <header class="spec__head">
+        <div>
+          <p class="mono-label"><span class="spec__id">{specId(project)}</span> / Spec sheet</p>
+          <p class="spec__title">{data.title}</p>
+        </div>
+        <button type="button" class="bracket-btn" data-spec-close>
+          Close Spec <span aria-hidden="true">✕</span>
+        </button>
+      </header>
+
+      <dl class="spec__facts">
+        {
+          facts.map(([term, value]) => (
+            <div>
+              <dt class="mono-label">{term}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="spec__grid">
+        <div class="spec__col">
+          <section>
+            <h4 class="mono-label spec__h">Objective / Problem Statement</h4>
+            <p class="spec__objective">{data.objective}</p>
+          </section>
+
+          <section>
+            <h4 class="mono-label spec__h">Engineering Approach & Tools Used</h4>
+            <div class="spec__prose"><Content /></div>
+            <ToolBadges tools={data.tools} />
+          </section>
+        </div>
+
+        <section class="spec__col">
+          <h4 class="mono-label spec__h">Key Outcome / Metrics</h4>
+          {
+            data.metrics.length > 0 && (
+              <dl class="metrics">
+                {data.metrics.map((metric) => (
+                  <div class="metric">
+                    <dt>{metric.label}</dt>
+                    <dd>{metric.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )
+          }
+          {data.outcome && <p class="spec__outcome">{data.outcome}</p>}
+        </section>
+      </div>
+
+      <section class="spec__figures">
+        <h4 class="mono-label spec__h">Figures <span class="spec__hint">/ select to enlarge</span></h4>
+        <ul class="strip" data-lightbox-group>
+          {
+            figures.map((figure) => (
+              <li>
+                <button
+                  type="button"
+                  class="shot"
+                  data-lightbox
+                  data-full={figure.full}
+                  data-alt={figure.alt}
+                  data-caption={`${figure.label} / ${figure.caption ?? figure.alt}`}
+                  aria-label={`Enlarge ${figure.label}: ${figure.alt}`}
+                >
+                  <span class="shot__frame">
+                    <Image src={figure.src} alt="" width={560} loading="lazy" decoding="async" />
+                    <span class="shot__zoom"><Icon name="expand" size={14} /></span>
+                  </span>
+                  <span class="shot__caption">
+                    <span class="accent">{figure.label}</span>
+                    {figure.caption ?? figure.alt}
+                  </span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <footer class="spec__foot">
+        <button type="button" class="bracket-btn" data-spec-close>
+          Close Spec <span aria-hidden="true">✕</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<style>
+  .spec {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    border: 1px solid var(--signal-line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    /* Table drawers inherit nowrap/weights from cells; reset them here. */
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 400;
+    text-align: left;
+    white-space: normal;
+    color: var(--text);
+  }
+
+  .spec__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .spec__id {
+    color: var(--signal);
+  }
+
+  .spec__title {
+    margin-top: 0.375rem;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  /* Facts: a title-block row */
+  .spec__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1px;
+    border: 1px solid var(--line);
+    background: var(--line);
+  }
+
+  .spec__facts > div {
+    padding: 0.625rem 0.75rem;
+    background: var(--canvas);
+  }
+
+  .spec__facts dd {
+    margin-top: 0.125rem;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+  }
+
+  .spec__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .spec__col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .spec__col > section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section.spec__col {
+    gap: 0;
+  }
+
+  .spec__h {
+    margin-bottom: 0.75rem;
+    color: var(--cobalt);
+  }
+
+  .spec__hint {
+    color: var(--muted);
+  }
+
+  .spec__objective {
+    max-width: 65ch;
+  }
+
+  .spec__prose {
+    max-width: 65ch;
+    margin-bottom: 1rem;
+    color: var(--muted);
+  }
+
+  .spec__prose :global(p + p),
+  .spec__prose :global(p + ul),
+  .spec__prose :global(ul + p) {
+    margin-top: 0.75rem;
+  }
+
+  .spec__prose :global(ul) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .spec__prose :global(li) {
+    position: relative;
+    padding-left: 1.125rem;
+  }
+
+  .spec__prose :global(li)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--cobalt);
+  }
+
+  .spec__prose :global(strong) {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .spec__prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--text);
+  }
+
+  /* Metrics */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid var(--line);
+    background: var(--line);
+  }
+
+  .metric {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding: 0.875rem;
+    background: var(--canvas);
+  }
+
+  .metric dd {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+
+  .metric dt {
+    font-size: var(--text-sm);
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .spec__outcome {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+
+  /* Figure strip */
+  .strip {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0 -1.25rem;
+    padding: 0 1.25rem 0.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  .strip li {
+    flex: 0 0 min(15rem, 68%);
+    scroll-snap-align: start;
+    scroll-margin-left: 1.25rem;
+  }
+
+  .shot {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+    cursor: zoom-in;
+  }
+
+  .shot__frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--figure);
+    transition: border-color 0.15s;
+  }
+
+  .shot__frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .shot__zoom {
+    position: absolute;
+    top: 0.375rem;
+    right: 0.375rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgb(9 13 22 / 0.85);
+    color: var(--muted);
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .shot:hover .shot__frame,
+  .shot:focus-visible .shot__frame {
+    border-color: var(--signal);
+  }
+
+  .shot:hover .shot__zoom {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .shot__caption {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  .shot__caption .accent {
+    flex: none;
+    text-transform: uppercase;
+  }
+
+  .spec__foot {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @container (min-width: 44rem) {
+    .spec__grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 2rem;
+    }
+  }
+
+  @container (min-width: 36rem) {
+    .strip li {
+      flex-basis: calc((100% - 2.25rem) / 4);
+      min-width: 11rem;
+    }
+  }
+</style>

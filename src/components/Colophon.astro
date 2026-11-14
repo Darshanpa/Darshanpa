@@ -1,0 +1,33 @@
+---
+import { site } from '../data/site';
+
+const built = new Date().toISOString().slice(0, 10);
+---
+
+<footer class="colophon mono-label">
+  <span>© {new Date().getFullYear()} {site.name}</span>
+  <span>Sheet 01 / 01</span>
+  <span>Built {built}</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+<style>
+  .colophon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin-top: 4rem;
+    padding-block: 1.25rem 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .colophon a {
+    margin-left: auto;
+    color: var(--muted);
+  }
+
+  .colophon a:hover {
+    color: var(--signal);
+    text-decoration: none;
+  }
+</style>

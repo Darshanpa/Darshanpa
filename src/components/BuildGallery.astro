@@ -1,0 +1,35 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { Project } from '../lib/projects';
+
+interface Props {
+  projects: Project[];
+  context: string;
+}
+
+const { projects, context } = Astro.props;
+---
+
+<!--
+  Each card is followed in the DOM by its drawer. The drawer spans both
+  columns and "dense" flow lets the next card back-fill the row above,
+  so an open drawer always sits directly below its card's row.
+-->
+<div class="gallery">
+  {projects.map((project, i) => <ProjectCard project={project} context={context} eager={i < 2} />)}
+</div>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row dense;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 40rem) {
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

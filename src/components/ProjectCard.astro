@@ -1,0 +1,220 @@
+---
+import { Image } from 'astro:assets';
+import SpecSheet from './SpecSheet.astro';
+import ToolBadges from './ToolBadges.astro';
+import { categoryLabel } from '../data/site';
+import { drawerId, specId, type Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+  /** Section the card is rendered in; keeps drawer ids unique across sections. */
+  context: string;
+  /** Load the cover eagerly (first row). */
+  eager?: boolean;
+  /** Image beside the text instead of above it (single wide entries). */
+  wide?: boolean;
+}
+
+const { project, context, eager = false, wide = false } = Astro.props;
+const { data } = project;
+const id = drawerId(context, project);
+---
+
+<article
+  class:list={['card', { 'card--wide': wide }]}
+  data-item
+  data-slug={project.id}
+  data-categories={data.categories.join(' ')}
+>
+  <div class="card__media">
+    <Image
+      src={data.cover}
+      alt={data.coverAlt}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 64rem) 34vw, (min-width: 40rem) 46vw, 92vw"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </div>
+
+  <div class="card__body">
+    <p class="mono-label card__meta">
+      <span class="accent">{data.year}</span>
+      <span aria-hidden="true">/</span>
+      <span>{data.categories.map(categoryLabel).join(' + ')}</span>
+      <span class="card__id">{specId(project)}</span>
+    </p>
+    <h3 class="card__title">
+      <button
+        type="button"
+        class="card__trigger"
+        data-spec-trigger
+        data-slug={project.id}
+        aria-expanded="false"
+        aria-controls={id}
+      >
+        {data.title}
+      </button>
+    </h3>
+    <p class="card__summary">{data.summary}</p>
+    <div class="card__foot">
+      <ToolBadges tools={data.tools} max={4} />
+      <span class="mono-label card__cue" aria-hidden="true">
+        <span class="cue--open">View spec +</span>
+        <span class="cue--close">Close spec −</span>
+      </span>
+    </div>
+  </div>
+</article>
+
+<div class="drawer" id={id} role="region" aria-label={`${data.title}: spec sheet`} data-spec-drawer hidden>
+  <SpecSheet project={project} />
+</div>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+
+  .card:hover,
+  .card.is-active {
+    border-color: var(--signal);
+  }
+
+  .card:has(.card__trigger:focus-visible) {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+
+  .card__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: var(--figure);
+  }
+
+  .card__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .card:hover .card__media :global(img) {
+    transform: scale(1.025);
+  }
+
+  .card__id {
+    margin-left: auto;
+    opacity: 0.7;
+  }
+
+  .card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.125rem 1.125rem;
+  }
+
+  .card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.5rem;
+  }
+
+  .card__title {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  .card__trigger {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .card__trigger:focus-visible {
+    outline: none;
+  }
+
+  /* The whole card is the click target. */
+  .card__trigger::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card__summary {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .card__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.625rem;
+  }
+
+  .card__cue {
+    flex: none;
+    margin-left: auto;
+    transition: color 0.15s;
+  }
+
+  .cue--close,
+  .card.is-active .cue--open {
+    display: none;
+  }
+
+  .card.is-active .cue--close {
+    display: inline;
+  }
+
+  .card:hover .card__cue,
+  .card.is-active .card__cue {
+    color: var(--signal);
+  }
+
+  .drawer {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .card--wide {
+      flex-direction: row;
+    }
+
+    .card--wide .card__media {
+      flex: 0 0 44%;
+      aspect-ratio: auto;
+      min-height: 13.5rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 0;
+    }
+
+    .card--wide .card__body {
+      padding: 1.25rem 1.375rem;
+    }
+  }
+</style>

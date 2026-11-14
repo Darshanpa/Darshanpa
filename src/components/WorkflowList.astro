@@ -1,0 +1,203 @@
+---
+import SpecSheet from './SpecSheet.astro';
+import ToolBadges from './ToolBadges.astro';
+import { drawerId, type Project } from '../lib/projects';
+
+interface Props {
+  projects: Project[];
+  context: string;
+}
+
+const { projects, context } = Astro.props;
+---
+
+<ul class="flows">
+  {
+    projects.map((project) => {
+      const id = drawerId(context, project);
+      const { data } = project;
+      return (
+        <li class="flow" data-item data-slug={project.id} data-categories={data.categories.join(' ')}>
+          <div class="flow__row">
+            <p class="mono-label flow__kind">
+              <span class="accent">{data.year}</span>
+              <span>{data.domain}</span>
+            </p>
+            <div class="flow__main">
+              <h3 class="flow__title">
+                <button
+                  type="button"
+                  class="flow__trigger"
+                  data-spec-trigger
+                  data-slug={project.id}
+                  aria-expanded="false"
+                  aria-controls={id}
+                >
+                  {data.title}
+                </button>
+              </h3>
+              <p class="flow__summary">{data.summary}</p>
+            </div>
+            <div class="flow__tools">
+              <ToolBadges tools={data.tools} max={4} />
+            </div>
+            <span class="flow__cue" aria-hidden="true" />
+          </div>
+          <div class="drawer" id={id} role="region" aria-label={`${data.title}: spec sheet`} data-spec-drawer hidden>
+            <SpecSheet project={project} />
+          </div>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .flows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flow__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    padding: 1rem 1.125rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+
+  .flow__row:hover,
+  .flow.is-active .flow__row {
+    border-color: var(--signal);
+  }
+
+  .flow__row:has(.flow__trigger:focus-visible) {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+
+  .flow__kind {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.625rem;
+    grid-column: 1;
+  }
+
+  .flow__main {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .flow__title {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  .flow__trigger {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .flow__trigger:focus-visible {
+    outline: none;
+  }
+
+  .flow__trigger::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .flow__summary {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .flow__tools {
+    grid-column: 1 / -1;
+  }
+
+  .flow__cue {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    width: 0.6875rem;
+    height: 0.6875rem;
+    color: var(--muted);
+    transition: color 0.15s;
+  }
+
+  .flow__cue::before,
+  .flow__cue::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .flow__cue::after {
+    transform: rotate(90deg);
+  }
+
+  .flow__row:hover .flow__cue,
+  .flow.is-active .flow__cue {
+    color: var(--signal);
+  }
+
+  .flow.is-active .flow__cue::after {
+    transform: rotate(0deg);
+  }
+
+  .drawer :global(.spec) {
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 80rem) {
+    .flow__row {
+      grid-template-columns: 9.5rem minmax(0, 1fr) minmax(0, 15rem) auto;
+      align-items: start;
+      gap: 1.25rem;
+    }
+
+    .flow__kind {
+      flex-direction: column;
+      gap: 0.125rem;
+      padding-top: 0.25rem;
+    }
+
+    .flow__main,
+    .flow__tools,
+    .flow__cue {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .flow__tools {
+      padding-top: 0.125rem;
+    }
+
+    .flow__tools :global(.badges) {
+      justify-content: flex-end;
+    }
+
+    .flow__cue {
+      align-self: start;
+      margin-top: 0.5rem;
+    }
+  }
+</style>

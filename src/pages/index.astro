@@ -1,0 +1,98 @@
+---
+import ArchiveTable from '../components/ArchiveTable.astro';
+import BuildGallery from '../components/BuildGallery.astro';
+import Colophon from '../components/Colophon.astro';
+import FilterBar from '../components/FilterBar.astro';
+import Lightbox from '../components/Lightbox.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Section from '../components/Section.astro';
+import SevaRoles from '../components/SevaRoles.astro';
+import Sidebar from '../components/Sidebar.astro';
+import WorkflowList from '../components/WorkflowList.astro';
+import Base from '../layouts/Base.astro';
+import { seva } from '../data/site';
+import { getProjects } from '../lib/projects';
+
+const projects = await getProjects();
+
+// Which projects each numbered section lists. A project may appear in more than one.
+const builds = projects.filter((p) => p.data.featured);
+const archive = projects.filter((p) => p.data.section !== 'seva');
+const software = projects.filter((p) => p.data.categories.includes('software'));
+const sevaProjects = projects.filter((p) => p.data.section === 'seva');
+---
+
+<Base>
+  <div class="shell">
+    <Sidebar />
+
+    <main class="stage" id="main">
+      <FilterBar total={projects.length} />
+
+      <div class="stage__inner">
+        <Section id="builds" count={builds.length}>
+          <BuildGallery projects={builds} context="builds" />
+        </Section>
+
+        <Section id="archive" count={archive.length}>
+          <ArchiveTable projects={archive} context="archive" />
+        </Section>
+
+        <Section id="software" count={software.length}>
+          <WorkflowList projects={software} context="software" />
+        </Section>
+
+        <Section id="seva" count={sevaProjects.length} lede={seva.intro}>
+          {sevaProjects.map((project) => <ProjectCard project={project} context="seva" wide />)}
+          <SevaRoles slot="after" />
+        </Section>
+
+        <Colophon />
+      </div>
+    </main>
+  </div>
+
+  <Lightbox />
+</Base>
+
+<script>
+  import { initDrawers } from '../scripts/drawers';
+  import { initFilters } from '../scripts/filters';
+  import { initLightbox } from '../scripts/lightbox';
+  import { initScrollSpy } from '../scripts/scrollspy';
+
+  const drawers = initDrawers();
+  initFilters(drawers);
+  initLightbox();
+  initScrollSpy();
+</script>
+
+<style>
+  .shell {
+    max-width: 100rem;
+    margin-inline: auto;
+  }
+
+  .stage {
+    min-width: 0;
+  }
+
+  .stage__inner {
+    padding-inline: var(--gutter);
+  }
+
+  .stage__inner > :global(.section:first-child) {
+    padding-top: 2.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(18.5rem, 30%) minmax(0, 1fr);
+    }
+
+    .stage {
+      min-height: 100vh;
+    }
+  }
+</style>
