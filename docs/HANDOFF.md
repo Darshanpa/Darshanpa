@@ -6,6 +6,8 @@ Every task below is small, has exact steps, and has a check that tells you it is
 **Read first, in this order:** `CLAUDE.md` (rules), this file, then `README.md` (how projects are written).
 `docs/GAME_PLAN.md` is the long-term plan. You do not need it for the tasks in this file.
 
+**If the job is finding photos in Darshan's photo library on his PC, follow `docs/PHOTO_INTAKE.md`.**
+
 ## Three rules that override everything
 
 1. **Never invent a fact.** If a date, number, role, or place is not in Darshan's own words or files, write `TODO(Darshan): ...` and ask him. Do not estimate. Do not "improve" a number.
@@ -21,15 +23,15 @@ Every task below is small, has exact steps, and has a check that tells you it is
 | Draft projects | 3, hidden from the site until finished: `lanka-site-operations`, `week-long-food-plan`, `murti-installation` |
 | Hosting and domain | Not connected yet (see `docs/GAME_PLAN.md`, Phase 1) |
 | Contact email | Still `hello@darshan-patel.pw`, which does not exist |
-| Darshan's desktop | Not searched. No folder on his computer was shared with the session. |
+| Darshan's photo library | At `F:\torrents\googlephotos` on his PC. Not searched yet. Run-book: `docs/PHOTO_INTAKE.md`. |
 
 ## Questions waiting on Darshan
 
 Ask these before doing tasks 2 and 3. Record each answer in the matching Markdown file.
 
-1. **Food plan:** was it 40 people or 50? (He said 40. His sheet says 50.) Where was it held? What did he do, and what did Rohan do? Are the dates Jul 29 to Aug 3, 2024?
+1. **Food plan:** answered 2026-11-15 and recorded in the draft (75 people, St. Louis mandir, guest chefs, local team only bought ingredients). Still open: are the dates Jul 29 to Aug 3, 2024, or was it the Dec 25 to 28, 2023 hangout?
 2. **Murti installation (Aug 30, 2023):** what was his role? May the photos be published?
-3. **Lanka project:** is the year 2026? May it be published? Where are the before and after photos?
+3. **Lanka projects:** he said there are several. Ask him to list them, with dates and what he did on each. The existing draft covers only the 2026 storage-yard project. Is the year 2026? May it be published?
 4. **Furnace and gold melting:** no photos were found in Drive. Can he add them? The raw files in his Drive folder "Labh 2023" (Sep 1, 2023) could not be opened; can he export a few as JPG?
 5. **Employer name:** is CSI "Closure Systems International" or "Crawfordsville Specialties, Inc."? His files use both. The site currently says only "CSI".
 6. **Email:** which address should the site show?

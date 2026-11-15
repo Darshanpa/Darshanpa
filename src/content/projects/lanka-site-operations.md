@@ -4,6 +4,10 @@
 # and his notes doc "akdm academy presentation" (both in his Google Drive).
 # TODO(Darshan): confirm the year is 2026 and that this can be published.
 # TODO(Darshan): supply before/after photos (the deck has empty placeholders for them).
+#   Look in the "akshardham-2026" window (docs/PHOTO_INTAKE.md).
+# TODO(Darshan): on 2026-11-15 he said there are MULTIPLE Lanka projects. Ask him to list them.
+#   This file covers only the 2026 storage-yard project from his symposium deck. Each other
+#   project gets its own file (docs/HANDOFF.md, task 3).
 draft: true
 title: Lanka Site Operations and Revitalization
 summary: Over five weeks, turned an unused storage yard into a safer, organized workspace while supporting other campus projects.

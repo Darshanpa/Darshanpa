@@ -1,0 +1,63 @@
+{
+  "_comment": "Each window is a place plus a date range that maps to portfolio projects. Dates are inclusive, in UTC. radiusKm is measured from each place. Photos with no GPS are kept if they fall in the date range and are marked gps=no.",
+  "windows": [
+    {
+      "id": "akshardham-2023-24",
+      "label": "Robbinsville, NJ: Akshardham, Jun 2023 to May 2024",
+      "from": "2023-06-01", "to": "2024-05-31",
+      "places": [{ "name": "Robbinsville NJ", "lat": 40.254, "lon": -74.578, "radiusKm": 10 }],
+      "projects": ["investment-casting-molds", "murti-installation", "campus-operations"],
+      "lookFor": "furnace, crucible, molten metal, gold, molds, castings, welding, fabrication tent, the murti lift on 2023-08-30, kitchens and large events"
+    },
+    {
+      "id": "akshardham-2026",
+      "label": "Robbinsville, NJ: Akshardham volunteer weeks, May to Jun 2026",
+      "from": "2026-05-01", "to": "2026-07-05",
+      "places": [{ "name": "Robbinsville NJ", "lat": 40.254, "lon": -74.578, "radiusKm": 10 }],
+      "projects": ["lanka-site-operations"],
+      "lookFor": "storage yard before and after, scrap steel, dumpsters, forklifts, demolition saws, welded fixtures, museum structural supports, repaired machines, electrical panels"
+    },
+    {
+      "id": "st-louis-hangouts",
+      "label": "St. Louis, MO: mandir hangouts, Dec 2023 and Jul to Aug 2024",
+      "ranges": [["2023-12-23", "2023-12-30"], ["2024-07-27", "2024-08-05"]],
+      "places": [{ "name": "St. Louis MO", "lat": 38.63, "lon": -90.2, "radiusKm": 70 }],
+      "projects": ["week-long-food-plan"],
+      "lookFor": "kitchen, trays of food, prep tables, serving lines, shopping hauls, whiteboard or printed plans"
+    },
+    {
+      "id": "rose-hulman",
+      "label": "Terre Haute, IN: Rose-Hulman, Aug 2019 to Jul 2023",
+      "from": "2019-08-01", "to": "2023-07-31",
+      "places": [{ "name": "Terre Haute IN", "lat": 39.483, "lon": -87.324, "radiusKm": 20 }],
+      "projects": ["fsae-brake-system", "human-powered-vehicle", "print-ticketing-system"],
+      "lookFor": "race car, pedal box, brake rotors and calipers, fairing layup, the human powered vehicle, machine shop, CNC, waterjet, welding, 3D printers"
+    },
+    {
+      "id": "fsae-michigan-2023",
+      "label": "Brooklyn, MI: Formula SAE competition, May to Jun 2023",
+      "from": "2023-05-01", "to": "2023-06-30",
+      "places": [{ "name": "Michigan International Speedway", "lat": 42.066, "lon": -84.241, "radiusKm": 20 }],
+      "projects": ["fsae-brake-system"],
+      "lookFor": "the car at competition, brake test, tech inspection, team photos"
+    },
+    {
+      "id": "csi-crawfordsville",
+      "label": "Crawfordsville, IN: CSI, May 2024 to May 2026 (EMPLOYER)",
+      "from": "2024-05-01", "to": "2026-05-31",
+      "places": [{ "name": "Crawfordsville IN", "lat": 40.04, "lon": -86.87, "radiusKm": 12 }],
+      "needsClearance": true,
+      "projects": ["packaging-defect-root-cause", "single-part-redesign"],
+      "lookFor": "test rigs, prototypes, lab equipment. Do not publish anything from here without Darshan's explicit yes."
+    },
+    {
+      "id": "wolf-fishers",
+      "label": "Fishers, IN: Wolf Technical Services, Jul 2026 onward (EMPLOYER)",
+      "from": "2026-07-01", "to": "2099-12-31",
+      "places": [{ "name": "Fishers IN", "lat": 39.956, "lon": -86.014, "radiusKm": 12 }],
+      "needsClearance": true,
+      "projects": ["ls-engine-test-stand", "rotor-blade-validation"],
+      "lookFor": "engine test stand, wiring, brackets, rotor hardware. Do not publish anything from here without Darshan's explicit yes."
+    }
+  ]
+}
