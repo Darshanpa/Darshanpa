@@ -1,7 +1,7 @@
 # Working on this repo
 
 Personal engineering portfolio for Darshan Patel, served at darshan-patel.pw. Astro, static, one page.
-`README.md` has the file map and frontmatter reference. `docs/GAME_PLAN.md` has the current plan.
+`README.md` has the file map and frontmatter reference. `docs/HANDOFF.md` has the next tasks as exact steps; start there. `docs/GAME_PLAN.md` has the long-term plan.
 
 ## Commands
 

@@ -95,6 +95,8 @@ Images can be JPG, PNG, WebP, AVIF, or SVG at any size. Astro resizes and conver
 
 Set `draft: true` to keep a project out of the build.
 
+To prepare photos (resize, strip location data), run `node tools/prep-image.mjs <project-slug> <photo...>`. Until a project has a real image, point `cover` at `./_shared/pending.svg`.
+
 Each project has a shareable link: `https://darshan-patel.pw/#spec-<file-name>` opens that spec sheet.
 
 ## Edit everything else

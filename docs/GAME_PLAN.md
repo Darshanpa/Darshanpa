@@ -10,6 +10,7 @@ Read `README.md` first for the file map and the frontmatter reference, and `CLAU
 - Every figure except the two site screenshots is a schematic placeholder SVG (labelled "Placeholder · Illustrative"). Replacing these with real photos and CAD is the main job.
 - Not done yet: hosting connected, domain pointed, a working contact email.
 - The only branch is `ccr-483aa1cd-l3yf7v`, which is also the default branch.
+- Three more projects exist as hidden drafts (`draft: true`), and `tools/prep-image.mjs` prepares photos. `docs/HANDOFF.md` lists the immediate tasks and the questions waiting on Darshan.
 
 ## The outcome Darshan wants
 

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Image not supplied yet">
+<defs>
+<pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#0E1726" stroke-width="1"/></pattern>
+<pattern id="G" width="200" height="200" patternUnits="userSpaceOnUse"><path d="M200 0H0V200" fill="none" stroke="#162134" stroke-width="1"/></pattern>
+<pattern id="hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#3B82F6" stroke-width="1.6" opacity="0.6"/></pattern>
+<pattern id="hatchS" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#F97316" stroke-width="1.6" opacity="0.6"/></pattern>
+<marker id="aD" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="#5B6B85"/></marker>
+<marker id="aL" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="#3B82F6"/></marker>
+<marker id="aS" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="#F97316"/></marker>
+<marker id="aH" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="#93C5FD"/></marker>
+<radialGradient id="hot"><stop offset="0" stop-color="#F97316" stop-opacity="0.95"/><stop offset="0.35" stop-color="#F59E0B" stop-opacity="0.55"/><stop offset="0.7" stop-color="#3B82F6" stop-opacity="0.35"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></radialGradient>
+<linearGradient id="legend" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F97316"/><stop offset="0.3" stop-color="#F59E0B"/><stop offset="0.65" stop-color="#3B82F6"/><stop offset="1" stop-color="#12224A"/></linearGradient>
+
+</defs>
+<rect width="1600" height="900" fill="#070B13"/><rect width="1600" height="900" fill="url(#g)"/><rect width="1600" height="900" fill="url(#G)"/>
+<path d="M40 80V40H80 M1520 40H1560V80 M1560 820V860H1520 M80 860H40V820" fill="none" stroke="#5B6B85" stroke-width="2"/>
+<text x="72" y="84" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="20" fill="#3B82F6" text-anchor="start" letter-spacing="2" xml:space="preserve">DP</text><text x="1528" y="84" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="18" fill="#5B6B85" text-anchor="end" letter-spacing="2" xml:space="preserve">DRAFT</text>
+<rect x="420" y="250" width="760" height="400" fill="none" stroke="#5B6B85" stroke-width="2" stroke-dasharray="14 10"/><line x1="420" y1="250" x2="1180" y2="650" fill="none" stroke="#162134" stroke-width="1.5"/><line x1="1180" y1="250" x2="420" y2="650" fill="none" stroke="#162134" stroke-width="1.5"/><rect x="560" y="400" width="480" height="100" fill="#070B13"/><text x="800" y="446" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="30" fill="#F3F4F6" text-anchor="middle" letter-spacing="6" xml:space="preserve">PHOTO PENDING</text><text x="800" y="484" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="16" fill="#5B6B85" text-anchor="middle" letter-spacing="3" xml:space="preserve">REPLACE WITH A REAL IMAGE</text>
+<text x="72" y="838" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="20" fill="#F97316" text-anchor="start" letter-spacing="2" xml:space="preserve">FIG. 00</text><text x="190" y="838" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="20" fill="#F3F4F6" text-anchor="start" letter-spacing="2" xml:space="preserve">IMAGE NOT SUPPLIED YET</text>
+<text x="1528" y="838" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="16" fill="#5B6B85" text-anchor="end" letter-spacing="2" xml:space="preserve">PLACEHOLDER · ILLUSTRATIVE</text>
+</svg>
