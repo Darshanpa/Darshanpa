@@ -7,22 +7,26 @@ export const site = {
   name: 'Darshan Patel',
   title: 'Mechanical R&D Engineer & Systems Builder',
   bio: [
-    'I design mechanical systems, find out why they fail, and write the software that makes both jobs faster.',
-    'The same discipline carries into the community work I lead outside the lab.',
+    'Mechanical engineer at Wolf Technical Services, building test hardware for rotor and engine programs.',
+    'Before that, two years in packaging R&D, where root cause work cut consumer defect rates by more than 80%.',
+  ],
+  /** Short factual lines under the bio. */
+  credentials: [
+    'B.S. Mechanical Engineering, Rose-Hulman, 2023',
+    'Shainin RED X Apprentice certified',
   ],
   description:
-    'Engineering portfolio of Darshan Patel: mechanical CAD assemblies, root-cause failure analysis, automotive builds, Python and AI workflows, and community production work.',
+    'Engineering portfolio of Darshan Patel: engine and rotor test hardware, root cause analysis, investment casting, Formula SAE brakes, AI workflows, and community service.',
   url: 'https://darshan-patel.pw',
   /** Shown in the Signal Orange pill. Set to '' to hide it. */
-  status: 'Open to R&D collaboration',
+  status: 'Now at Wolf Technical Services',
   /** Prefix for spec IDs, e.g. DP-25-01. */
   idPrefix: 'DP',
 } as const;
 
 export const socials = [
   { id: 'github', label: 'GitHub', href: 'https://github.com/Darshanpa' },
-  // TODO: replace with your LinkedIn profile URL.
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/darshan-patel-31882a195' },
   // TODO: point this at a mailbox that exists (set up forwarding for the domain, or use another address).
   { id: 'email', label: 'Email', href: 'mailto:hello@darshan-patel.pw' },
 ] as const;
@@ -67,28 +71,28 @@ export const principles = [
 /** 04. Seva & Community: standing roles, listed under the project entries. */
 export const seva = {
   intro:
-    'Seva is selfless service. I run it the way I run engineering work: clear requirements, a plan volunteers can follow, and a debrief at the end.',
+    'Seva is selfless service. Most of mine has been with BAPS in Robbinsville, New Jersey, alongside founding and leading student organizations at Rose-Hulman.',
   roles: [
     {
       code: 'SV-01',
-      name: 'Community Leadership',
-      org: 'Youth volunteer teams',
-      period: '2019 to present',
-      spec: 'Plan weekly activities, mentor new coordinators, and write the handoff notes so each team starts ahead of the last one.',
+      name: 'Field Operations & Fabrication Volunteer',
+      org: 'BAPS Swaminarayan Akshardham, Robbinsville, NJ',
+      period: 'May to Jun 2026',
+      spec: 'Six weeks on site during temple construction, working alongside professional fabricators and welders. Repaired field machinery from demolition saws to small bulldozers, helped an electrician install and wire panels, and supported security and visitor services.',
     },
     {
       code: 'SV-02',
-      name: 'Stage & Prop Production',
-      org: 'Annual cultural programs',
-      period: '2021 to present',
-      spec: 'Lead design, fabrication, transport, and load-in for modular stage sets built by volunteers of every skill level.',
+      name: 'President & Co-Founder',
+      org: 'Alpha Phi Omega National Service Fraternity, Terre Haute, IN',
+      period: 'May 2021 to Jul 2023',
+      spec: 'Co-founded a campus service organization and led it through its first years, mentoring members through event leadership and community service.',
     },
     {
       code: 'SV-03',
-      name: 'Volunteer Service',
-      org: 'BAPS Swaminarayan Sanstha',
-      period: 'Ongoing',
-      spec: 'Regular service at the mandir and at regional events: setup, logistics, and whatever the day needs.',
+      name: 'Team President',
+      org: 'Human Powered Vehicle Team, Rose-Hulman',
+      period: 'May 2021 to Jul 2023',
+      spec: 'Led the team through two competition cycles with podium finishes at three ASME competitions, and built its culture through coaching and clear accountability.',
     },
   ],
 } as const;

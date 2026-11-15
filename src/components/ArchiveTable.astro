@@ -46,6 +46,7 @@ const { projects, context } = Astro.props;
                 >
                   {data.title}
                 </button>
+                {data.org && <span class="row__org">{data.org}</span>}
                 <span class="row__domain">{data.domain}</span>
               </td>
               <td class="col-domain">{data.domain}</td>
@@ -138,6 +139,13 @@ const { projects, context } = Astro.props;
   .row:hover .row__trigger,
   .row.is-active .row__trigger {
     color: var(--signal);
+  }
+
+  .row__org {
+    display: block;
+    margin-top: 0.125rem;
+    font-size: var(--text-sm);
+    color: var(--muted);
   }
 
   .row__domain {

@@ -25,7 +25,8 @@ const figures = await Promise.all(
 );
 
 const facts = [
-  ['Year', String(data.year)],
+  ['Period', data.period ?? String(data.year)],
+  ['Organization', data.org],
   ['Role', data.role],
   ['Duration', data.duration],
   ['Status', data.status],
@@ -270,8 +271,7 @@ const facts = [
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1px;
-    border: 1px solid var(--line);
-    background: var(--line);
+    padding: 1px;
   }
 
   .metric {
@@ -281,6 +281,8 @@ const facts = [
     gap: 0.25rem;
     padding: 0.875rem;
     background: var(--canvas);
+    /* 1px rings overlap in the 1px gap, so an odd count leaves no filled empty cell */
+    box-shadow: 0 0 0 1px var(--line);
   }
 
   .metric dd {

@@ -41,7 +41,7 @@ const id = drawerId(context, project);
     <p class="mono-label card__meta">
       <span class="accent">{data.year}</span>
       <span aria-hidden="true">/</span>
-      <span>{data.categories.map(categoryLabel).join(' + ')}</span>
+      <span>{data.categories.length ? data.categories.map(categoryLabel).join(' + ') : data.domain}</span>
       <span class="card__id">{specId(project)}</span>
     </p>
     <h3 class="card__title">

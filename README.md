@@ -55,10 +55,12 @@ summary: One line, shown on cards and rows (160 characters max).
 year: 2025
 order: 1                      # two-digit sequence; spec ID becomes DP-25-01
 domain: Mechanism Design      # Domain column in the archive table
-categories: [hardware]        # hardware | failure | software (drives the filter bar)
+categories: [hardware]        # hardware | failure | software (drives the filter bar); may be empty
 section: engineering          # engineering | software | seva
 featured: true                # true = card in 01. Selected Builds
 tools: [SOLIDWORKS, FEA, GD&T]
+org: Acme Robotics            # optional; employer or team
+period: Jan 2025 to Apr 2025  # optional; shown instead of the year in the spec sheet
 role: Design lead             # optional
 duration: 14 weeks            # optional
 status: Prototype tested      # optional
